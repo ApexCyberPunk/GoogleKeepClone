@@ -2,11 +2,12 @@ class App {
   constructor() {
     this.notes = []
 
-
+    this.$placeholder = document.querySelector("#placeholder")
     this.$form = document.querySelector('#form')
     this.$noteTitle = document.querySelector("#note-title")
     this.$noteText = document.querySelector("#note-text")
     this.$formButtons = document.querySelector('#form-buttons')
+    this.$notes = document.querySelector("#notes")
 
     this.addEventListeners()
 
@@ -59,7 +60,7 @@ closeForm() {
   this.$noteTitle.style.display = "none";
   this.$formButtons.style.display = 'none';
 }
-
+// the note parameter in addNote(note) is an object with title and text as the arguments
 addNote(note) {
 const newNote = {
   title: note.title,
@@ -68,10 +69,30 @@ const newNote = {
   id: this.notes.length > 0 ? this.notes[this.notes.length - 1].id + 1 : 1
 }
 this.notes = [...this.notes, newNote];
-
-console.log(this.notes)
-
+this.displayNotes()
 }
+
+displayNotes() {
+  const hasNotes = this.notes.length > 0
+
+  this.$placeholder.style.display = hasNotes ? "none" : "flex"
+  // c for copy since map copies from this.notes array 
+  this.$notes.innerHTML = this.notes.map(cOfNotes => 
+    `
+    <div style="background: ${cOfNotes.color}" class="note">
+<div class="${cOfNotes.title && 'note-title'}">${cOfNotes.title}</div>
+<div class="note-text">${cOfNotes.text}</div>
+<div class="toolbar-container">
+<div class="toolbar">
+    <img class="toolbar-color" src="https://icon.now.sh/palette">
+    <img class="toolbar-delete" src="https://icon.now.sh/delete">
+      </div>
+    </div>
+</div>
+    `
+    )
+}
+
 
 }
 
