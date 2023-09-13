@@ -59,6 +59,8 @@ closeForm() {
   this.$form.classList.remove('form-open')
   this.$noteTitle.style.display = "none";
   this.$formButtons.style.display = 'none';
+  this.$noteTitle.value = ""
+  this.$noteText.value = ""
 }
 // the note parameter in addNote(note) is an object with title and text as the arguments
 addNote(note) {
@@ -70,6 +72,7 @@ const newNote = {
 }
 this.notes = [...this.notes, newNote];
 this.displayNotes()
+this.closeForm()
 }
 
 displayNotes() {
@@ -90,7 +93,7 @@ displayNotes() {
     </div>
 </div>
     `
-    )
+    ).join("")
 }
 
 
