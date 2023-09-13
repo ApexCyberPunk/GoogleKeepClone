@@ -9,14 +9,18 @@ class App {
     this.$formButtons = document.querySelector('#form-buttons')
     this.$notes = document.querySelector("#notes")
     this.$closeButton = document.querySelector("#form-close-button")
-
+    this.$modal = document.querySelector(".modal")
+    
     this.addEventListeners()
 
   }
 
   addEventListeners() {
     document.body.addEventListener('click', (event) =>
-    { this.handleFormClick(event) })
+    { 
+      this.handleFormClick(event)
+      this.openModal(event)
+    })
 
     this.$form.addEventListener('submit', event =>
     {
@@ -75,6 +79,12 @@ closeForm() {
   this.$formButtons.style.display = 'none';
   this.$noteTitle.value = ""
   this.$noteText.value = ""
+}
+
+openModal(event) {
+  if (event.target.closest('.note')) {
+    this.$modal.classList.toggle('open-modal')
+  }
 }
 // the note parameter in addNote(note) is an object with title and text as the arguments
 // destructure the note parameter for addNote() 
