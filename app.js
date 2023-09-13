@@ -8,6 +8,7 @@ class App {
     this.$noteText = document.querySelector("#note-text")
     this.$formButtons = document.querySelector('#form-buttons')
     this.$notes = document.querySelector("#notes")
+    this.$closeButton = document.querySelector("#form-close-button")
 
     this.addEventListeners()
 
@@ -29,6 +30,13 @@ class App {
       }
   
     })
+
+    this.$closeButton.addEventListener('click', event =>
+    {
+      event.stopPropagation()
+      this.closeForm()
+    }
+    )
     
   }
   
@@ -38,10 +46,16 @@ class App {
 
 const isFormClicked = this.$form.contains(y.target)
 
+const title = this.$noteTitle.value
+const text = this.$noteText.value
+const hasNote = title || text;
+
 if (isFormClicked) {
 // open form
 this.openForm();
 
+} else if (hasNote) {
+    this.addNote({title, text})
 } else {
 // close form
 this.closeForm()
@@ -63,10 +77,12 @@ closeForm() {
   this.$noteText.value = ""
 }
 // the note parameter in addNote(note) is an object with title and text as the arguments
-addNote(note) {
+// destructure the note parameter for addNote() 
+
+addNote({title, text}) {
 const newNote = {
-  title: note.title,
-  text: note.text,
+  title,
+  text,
   color: "white",
   id: this.notes.length > 0 ? this.notes[this.notes.length - 1].id + 1 : 1
 }
@@ -79,8 +95,8 @@ displayNotes() {
   const hasNotes = this.notes.length > 0
 
   this.$placeholder.style.display = hasNotes ? "none" : "flex"
-  // c for copy since map copies from this.notes array 
-  this.$notes.innerHTML = this.notes.map(cOfNotes => 
+  // c for copy since map copies from this.notes array
+  this.$notes.innerHTML = this.notes.map(cOfNotes =>
     `
     <div style="background: ${cOfNotes.color}" class="note">
 <div class="${cOfNotes.title && 'note-title'}">${cOfNotes.title}</div>
