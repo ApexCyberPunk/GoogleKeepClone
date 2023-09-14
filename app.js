@@ -188,11 +188,10 @@ if (!$selectedNote) return;
 
 deleteNote(event) {
   event.stopPropagation();
-  if (!event.target.matches('.toolbar-delete')) {
+  if (!event.target.matches('.toolbar-delete')) return;
 const id = event.target.dataset.id
-this.notes.filter(mOfNotes => mOfNotes.id !== Number(id))
+this.notes = this.notes.filter(mOfNotes => mOfNotes.id !== Number(id))
 this.displayNotes()
-  }
 }
 
 displayNotes() {
@@ -207,8 +206,8 @@ displayNotes() {
 <div class="note-text">${mOfNotes.text}</div>
 <div class="toolbar-container">
 <div class="toolbar">
-    <img class="toolbar-color" data-id=${mOfNotes.id} src="https://icon.now.sh/palette">
-    <img class="toolbar-delete" data-id=${mOfNotes.id} src="https://icon.now.sh/delete">
+    <img class="toolbar-color" data-id=${mOfNotes.id} src="https://photographypro.com/wp-content/uploads/2018/01/color-2-color-wheel@2x.jpg">
+    <img class="toolbar-delete" data-id=${mOfNotes.id} src="https://t3.ftcdn.net/jpg/02/53/59/50/360_F_253595052_X69nEbLg6VanlCov7KKdjfogJHmrRwAo.jpg">
       </div>
     </div>
 </div>
