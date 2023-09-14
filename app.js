@@ -120,7 +120,7 @@ closeForm() {
 
 openModal(event) {
   if (event.target.matches('.toolbar-delete')) return
-  
+
   if (event.target.closest('.note')) {
     this.$modal.classList.toggle('open-modal')
     this.$modalTitle.value = this.title;
@@ -190,7 +190,7 @@ deleteNote(event) {
   event.stopPropagation();
   if (!event.target.matches('.toolbar-delete')) {
 const id = event.target.dataset.id
-this.notes.filter(mOfNotes => mapOfNotes.id !== Number(id))
+this.notes.filter(mOfNotes => mOfNotes.id !== Number(id))
 this.displayNotes()
   }
 }
