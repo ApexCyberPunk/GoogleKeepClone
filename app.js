@@ -25,7 +25,7 @@ class App {
 
   addEventListeners() {
     document.body.addEventListener('click', (event) =>
-    { 
+    {
       this.handleFormClick(event)
       this.selectNote(event)
       this.openModal(event)
@@ -61,11 +61,11 @@ class App {
       const title = this.$noteTitle.value
       const text = this.$noteText.value
       const hasNote = title || text;
-     
+
       if (hasNote) {
         this.addNote({title, text})
       }
-  
+
     })
 
     this.$closeButton.addEventListener('click', event =>
@@ -128,7 +128,7 @@ openModal(event) {
   }
 }
 // the note parameter in addNote(note) is an object with title and text as the arguments
-// destructure the note parameter for addNote() 
+// destructure the note parameter for addNote()
 
 closeModal(event) {
 this.editNote()
